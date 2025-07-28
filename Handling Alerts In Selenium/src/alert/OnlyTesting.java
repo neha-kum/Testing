@@ -13,36 +13,22 @@ public class OnlyTesting {
 	public void TestPopups() throws InterruptedException {
 		
 		WebDriver driver = new ChromeDriver();
-	    driver.get("https://the-internet.herokuapp.com/javascript_alerts");
+	    driver.get("http://only-testing-blog.blogspot.com/2014/05/form.html");
 	    driver.manage().window().maximize();
+	    
+	    driver.findElement(By.name("FirstName")).sendKeys("Neha");
+		driver.findElement(By.name("LastName")).sendKeys("Kumari");
+		driver.findElement(By.name("EmailID")).sendKeys("nehak78800@gmail.com");
+		driver.findElement(By.name("MobNo")).sendKeys("7880049324");
+		driver.findElement(By.name("Company")).sendKeys("Oracle");
 
 	    
 	  
-	    driver.findElement(By.xpath("//button[contains(text(),'Click for JS Alert')]")).click();
-		Alert alert = driver.switchTo().alert();
+		driver.findElement(By.xpath("//input[contains(@type,'submit')]")).click();
 		Thread.sleep(3000);
-		alert.accept();
-		String result = driver.findElement(By.cssSelector("#result")).getText();
-		System.out.println(result);
-		Assert.assertEquals("You successfully clicked an alert", result);
-        
+		driver.switchTo().alert().accept();
 		
-        driver.findElement(By.xpath("//button[contains(text(), 'Click for JS Confirm')]")).click();
-        Alert alert2 = driver.switchTo().alert();
-        Thread.sleep(3000); 
-        alert2.dismiss();   
-        String result2 = driver.findElement(By.cssSelector("#result")).getText();
-        System.out.println(result2);
-        Assert.assertEquals(result2, "You clicked: Cancel");
-
-        
-        driver.findElement(By.xpath("//button[normalize-space()='Click for JS Prompt']")).click();
-        Alert alert3 = driver.switchTo().alert();
-        Thread.sleep(3000);
-        alert3.accept(); 
-        String result3 = driver.findElement(By.cssSelector("#result")).getText();
-        System.out.println(result3);
-        Assert.assertEquals(result3, "You clicked: Ok");
+		driver.quit();
         	    
 	}
 	
